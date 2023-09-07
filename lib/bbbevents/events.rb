@@ -12,6 +12,7 @@ module BBBEvents
       "user_responded_to_poll_record_event",
       "add_shape_event",
       "poll_published_record_event",
+      "add_tldraw_shape_event",
     ]
 
     EMOJI_WHITELIST = %w(away neutral confused sad happy applause thumbsUp thumbsDown)
@@ -178,6 +179,15 @@ module BBBEvents
         if poll = @polls[e["pollId"]]
           poll.published = true
         end
+      end
+    end
+
+    # Log drawings and text annotations
+    def add_tldraw_shape_event(e)
+      intUserId = e['userId']
+      # If the attendee exists, increment their messages.
+      if att = @attendees[@externalUserId[intUserId]]
+        att.engagement[:whiteboard_actions] += 1
       end
     end
   end

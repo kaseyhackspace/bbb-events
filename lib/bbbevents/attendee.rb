@@ -24,6 +24,7 @@ module BBBEvents
         emojis: 0,
         poll_votes: 0,
         talk_time: 0,
+        whiteboard_actions: 0,
       }
 
       # A hash of join and lefts arrays for each internal user id
@@ -55,6 +56,7 @@ module BBBEvents
         e[:emojis],
         e[:poll_votes],
         e[:raisehand],
+        e[:whiteboard_actions],
         seconds_to_time(@engagement[:talk_time]),
         joined.strftime(DATE_FORMAT),
         left.strftime(DATE_FORMAT),
